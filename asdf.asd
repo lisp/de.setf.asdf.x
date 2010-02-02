@@ -15,4 +15,9 @@
   :depends-on ()
   :components
   ((:file "asdf")
-   #+ecl (:file "asdf-ecl" :depends-on ("asdf"))))
+   #+ecl (:file "asdf-ecl" :depends-on ("asdf"))
+   (:module :de.setf
+    :pathname #p"LIBRARY:de;setf;utility;asdf;"
+    :components ((:file "patches")
+                 (:file "hierarchical-names")
+                 (:file "contingent-on")))))

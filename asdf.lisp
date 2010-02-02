@@ -202,7 +202,9 @@ Defaults to `t`.")
 ;;;; * define methods on UPDATE-INSTANCE-FOR-REDEFINED-CLASS
 ;;;;   for each of the classes we define that has changed incompatibly.
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (fmakunbound 'system-source-file)
+  (when (and (fboundp 'system-source-file)
+             (not (typep (fdefinition 'system-source-file) 'generic-function)))
+    (fmakunbound 'system-source-file))
   #+ecl
   (when (find-class 'compile-op nil)
     (defmethod update-instance-for-redefined-class :after
@@ -537,7 +539,8 @@ and NIL NAME and TYPE components"
    (parent :initarg :parent :initform nil :reader component-parent)
    ;; no direct accessor for pathname, we do this as a method to allow
    ;; it to default in funky ways if not supplied
-   (relative-pathname :initarg :pathname)
+   (relative-pathname :initarg :pathname
+                      :reader get-component-relative-pathname)
    (operation-times :initform (make-hash-table)
                     :accessor component-operation-times)
    ;; XXX we should provide some atomic interface for updating the
@@ -598,7 +601,7 @@ and NIL NAME and TYPE components"
        *default-pathname-defaults*))
 
 (defmethod component-relative-pathname ((component module))
-  (or (slot-value component 'relative-pathname)
+  (or (get-component-relative-pathname component)
       (multiple-value-bind (relative path)
           (split-path-string (component-name component) t)
         (make-pathname
@@ -870,12 +873,12 @@ to `~a` which is not a directory.~@:>"
   (merge-pathnames
    (or pathname (make-pathname :directory `(,relative ,@path)))
    (if type
-       (make-pathname :name filename :type type)
+       (make-pathname :directory nil :name filename :type type)
        filename))))
 
 (defmethod component-relative-pathname ((component source-file))
   (merge-component-relative-pathname
-   (slot-value component 'relative-pathname)
+   (get-component-relative-pathname component)
    (component-name component)
    (source-file-type component (component-system component))))
 
@@ -1780,7 +1783,7 @@ See [implementation-specific-directory-name][] for details.")
 ")
 
 (defparameter *implementation-features*
-  '(:allegro :lispworks :sbcl :ccl :openmcl :cmu :clisp
+  '(:allegro :lispworks :mcl :sbcl :ccl :openmcl :cmu :clisp
     :corman :cormanlisp :armedbear :gcl :ecl :scl))
 
 (defparameter *os-features*
@@ -1800,6 +1803,7 @@ See [implementation-specific-directory-name][] for details.")
   #+cmu       (substitute #\- #\/
                           (substitute #\_ #\Space
                                       (lisp-implementation-version)))
+  #+mcl       (substitute #\_ #\Space (lisp-implementation-version))
   #+scl       (lisp-implementation-version)
   #+sbcl      (lisp-implementation-version)
   #+ecl       (reduce (lambda (x str) (substitute #\_ str x))
@@ -2357,6 +2361,43 @@ with a different configuration, so the configuration would be re-read then."
 
   (pushnew 'module-provide-asdf sb-ext:*module-provider-functions*)
   (pushnew 'contrib-sysdef-search *system-definition-search-functions*))
+
+
+;;; given this loaded file, bootstrap the asdf definition:
+;;; - load its colocated .asd,
+;;; - adjusting the "asdf.lisp"'s component properties to indicate that it has
+;;;   been loaded as whether it has been compiled.
+;;; - load-op the system
+;;;
+;;; the consequence should be that the system is loaded. if this file does not
+;;; need to be compiled, the load will be net this file. 
+
+(unless (boundp '*asdf-bootstrap)        ; don't go on forever
+  (let* ((*asdf-bootstrap t)
+         (asdf-system-pathname
+          (make-pathname :name "asdf" :type "asd" :defaults *load-pathname*))
+         (asdf-system nil)
+         (asdf-source-file-component nil)
+         (asdf-source-file-pathname nil))
+    (declare (special *asdf-bootstrap))
+    (cond ((and (probe-file asdf-system-pathname)
+                (load asdf-system-pathname)
+                (setf asdf-system (find-system :asdf nil))
+                (setf asdf-source-file-component (find-component asdf-system "asdf")))
+           ;; adjust the component to reflect its loaded state
+           (setf (gethash 'asdf:load-op (component-operation-times asdf-source-file-component))
+                 (get-universal-time))
+           (setf asdf-source-file-pathname (component-pathname asdf-source-file-component))
+           (setf (gethash 'asdf:compile-op (component-operation-times asdf-source-file-component))
+                 (file-write-date (compile-file-pathname asdf-source-file-pathname)))
+           (when (equalp (truename *load-pathname*) (truename asdf-source-file-pathname))
+             (setf (component-property asdf-source-file-component 'last-loaded-as-source)
+                   (get-universal-time)))
+           ;; with the adjustments to reflect reality, load the system
+           (asdf:operate 'asdf:load-op :asdf))
+          (t
+           (asdf-message ";; No system definition in ~a" asdf-system-pathname)))))
+  
 
 ;;;; -------------------------------------------------------------------------
 ;;;; Cleanups after hot-upgrade.
