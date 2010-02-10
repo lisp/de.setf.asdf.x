@@ -18,5 +18,3 @@ home page at:
 
 
 last updated Saturday; July 18, 2009, 10:20 AM EDT
-
-2010-02-02: @lisp.github.com : Added recursive load logic to asdf.lisp to bootstrap a configuration file.

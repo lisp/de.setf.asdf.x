@@ -1,4 +1,4 @@
-;;; -*- Mode: lisp; Syntax: ansi-common-lisp; Base: 10; Package: asdf.i; -*-
+;;; -*- Mode: lisp; Syntax: ansi-common-lisp; Base: 10; Package: asdf-extensions.x; -*-
 
 ;;; This is asdf: Another System Definition Facility.
 ;;; hash - $Format:%H$
@@ -102,10 +102,10 @@
            #:load-source-op
            #:feature                 ; sort-of operation
            #:version                 ; metaphorically sort-of an operation
-
+           
            #:input-files #:output-files #:perform ; operation methods
            #:operation-done-p #:explain
-
+           
            #:component #:source-file
            #:c-source-file #:cl-source-file #:java-source-file
            #:static-file
@@ -117,7 +117,7 @@
            #:file
            #:system
            #:unix-dso
-
+           
            #:group-constituents          ; component accessors
            #:component-pathname
            #:component-relative-pathname
@@ -129,7 +129,7 @@
            #:component-depends-on
            #:reflexive-operations
            #:transitive-operations
-
+           
            #:system-description
            #:system-long-description
            #:system-author
@@ -139,10 +139,10 @@
            #:system-source-file
            #:system-relative-pathname
            #:map-systems
-
+           
            #:operation-on-warnings
            #:operation-on-failure
-
+           
            #:*system-definition-search-functions*
            #:*central-registry*         ; variables
            #:*operation-force*
@@ -152,9 +152,9 @@
            #:*resolve-symlinks*
            #:*pathname-resolver*
            #:*pathname-path-punctuation-character*
-
+           
            #:asdf-version
-
+           
            #:operation-error #:compile-failed #:compile-warned #:compile-error
            #:error-name
            #:error-pathname
@@ -166,57 +166,81 @@
            #:missing-dependency
            #:circular-dependency        ; errors
            #:duplicate-names
-
+           
            #:try-recompiling
            #:retry
            #:accept                     ; restarts
            #:coerce-entry-to-directory
            #:remove-entry-from-registry
-
+           
            #:standard-asdf-method-combination
-           #:dependency                     ; protocol assistants
-           #:constituency
-           #:restart
-
-
+           
+           
            #:initialize-source-registry
            #:clear-source-registry
            #:ensure-source-registry
            #:process-source-registry)
-  (:intern #:coerce-name
+  (:intern #:asdf-message
+           #:canonicalize-component-option
+           #:coerce-name
+           #:context-find-class
+           #:compute-performance-status
+           #:dependency
            #:getenv
-           #:system-registered-p
-           #:asdf-message
+           #:pathname-sans-name+type
+           #:perform-constituent
+           #:perform-requirement
+           #:registered-system
+           #:restart
            #:resolve-symlinks
-           #:pathname-sans-name+type))
+           #:system-registered-p))
+
 
 (defpackage #:asdf-extensions.x
   (:use #:common-lisp :asdf.x)
   (:import-from #:asdf.x
-                #:coerce-name
-                #:getenv
-                #:system-registered-p
                 #:asdf-message
+                #:canonicalize-component-option
+                #:coerce-name
+                #:context-find-class
+                #:compute-performance-status
+                #:dependency
+                #:getenv
+                #:pathname-sans-name+type
+                #:perform-constituent
+                #:perform-requirement
+                #:registered-system
+                #:restart
                 #:resolve-symlinks
-                #:pathname-sans-name+type))
+                #:system-registered-p))
+
+
+;;; create the prospective appearance to allow tests to be written as-if
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (unless (find-package :asdf)
+    (rename-package :asdf.x :asdf.x '(:asdf)))
+  (unless (find-package :asdf)
+    (rename-package :asdf-extensions.x :asdf-extensions.x '(:asdf-extensions))))
+
 
 (defpackage #:asdf-user
   (:use #:common-lisp :asdf.x)
   (:documentation "The package into which .asd files should be loaded."))
 
+#+(or ) ;;??? distinct from the extension package for this file itself
 (defpackage :asdf.i
-  (:use :common-lisp :asdf.x))
+  (:use :common-lisp :asdf.x :asdf-extensions.x))
 
-(unless (find-package :asdf)
-  (rename-package :asdf.x :asdf.x '(:asdf)))
 
 #+nil
 (error "The author of this file habitually uses #+nil to comment out ~
         forms. But don't worry, it was unlikely to work in the New ~
         Implementation of Lisp anyway")
 
-(in-package #:asdf.i)
+;;; eventually asdf-extensions
+(in-package #:asdf-extensions.x)
 
+;;;; -------------------------------------------------------------------------
 ;;;; -------------------------------------------------------------------------
 ;;;; Patches: Cleanups before hot-upgrade.
 ;;;; Things to do in case we're upgrading from a previous version of ASDF.
@@ -489,12 +513,12 @@ which evaluates to a pathname. For example:
                  ((:components :constituents)
                   (setf initforms
                         (nconc initforms
-                               (list key (cons 'list (mapcar #'(lambda (component)
-                                                                 (etypecase component
-                                                                   (cons
-                                                                    (destructuring-bind (type name . options) component
-                                                                      (rewrite-component context-var type name options)))))
-                                                             form))))))
+                               (mapcar #'(lambda (component)
+                                           (etypecase component
+                                             (cons
+                                              (destructuring-bind (type name . options) component
+                                                (rewrite-component context-var type name options)))))
+                                       form))))
                  (t
                   (multiple-value-bind (key form) (canonicalize-component-option prototype key form)
                     (setf initargs (nconc initargs (list key form)))))))
@@ -868,6 +892,11 @@ created with the same initargs as the original one.
    (constituents
     :initform nil :initarg :constituents :initarg :components
     :accessor component-constituents)
+   (unreinitialized-constituents
+    :initform nil :accessor component-unreinitialized-constituents
+    :documentation "Caches constituents as of reinitialization for use to
+ resolve names for subsequent define-component calls in order to reuse
+ previous constituents, and eventually to remove any dangling inline methods.")
    (dependencies
     :initform nil
     :accessor component-dependencies)
@@ -936,12 +965,15 @@ created with the same initargs as the original one.
     :initform nil :initarg :properties
     :accessor component-properties)
    (inline-methods
-    :accessor component-inline-methods :initform nil
+    ;; no accessor, no initialization
     ;; should one get to use the mop, specializer-direct-methods would be better.
     :documentation "A cache of the methods defined using the 'inline' style
-     in a defsystem form. Each entry is of the form (function-name method).
-     The list is used to delete them when the component is updated without
-     requiring mop support to examine spacializers.")
+     in a defsystem form. Each entry is of the form
+        (function-name method)
+     The cache is used to delete them when the component is updated without
+     requiring mop support to examine spacializers. It is initially unbound and
+     filled as a side-effect of processing those initialization arguments which
+     apper in `component-inline-method-names`.")
    (inline-method-names
     :initform +asdf-methods+ :allocation :class
     :reader component-inline-method-names
@@ -1145,7 +1177,7 @@ created with the same initargs as the original one.
 ;;; presences of a specific initarg and to unbind slots which are computed
 ;;; on demand.
 ;;; The method keywords (see +asdf-methods+) are just declared, and left to
-;;; %refresh-component-inline-methods to process.
+;;; %define-component-inline-methods to process.
 ;;; The dependency keywords are just declared, and left to
 ;;; %refresh-component-dependencies to process.
 ;;; Should others be necessary, the specialized component class must define
@@ -1185,9 +1217,7 @@ created with the same initargs as the original one.
         (setf-component-relative-pathname relative-pathname component)))
     (setf (component-dependencies component)
           (collect-component-dependencies component initargs))
-    (when (slot-boundp component 'inline-methods)
-      (%remove-component-inline-methods component))
-    (setf (component-constituents component) nil)
+    (%remove-component-inline-methods component)
     (%define-component-inline-methods component initargs)))
 
 
@@ -1200,25 +1230,31 @@ created with the same initargs as the original one.
 (defmethod reinitialize-instance ((component component) &rest initargs)
   (declare (dynamic-extent initargs))
   (initialize-component component initargs)
-  (call-next-method)
+  (map nil #'%remove-component-inline-methods
+       (component-unreinitialized-constituents component))
+  (setf (component-unreinitialized-constituents component)
+        (component-constituents component))
+  (setf (component-constituents component) nil)
   component)
 
 
 (defun %remove-component-inline-methods (component)
   "Clear component-specific methods, as reflected in it's cache."
-  (loop for (gf-name method) in (component-inline-methods component)
-        when (fboundp gf-name)          ; who knows, it could disappear?
-        do (remove-method (symbol-function gf-name) method))
-  (setf (component-inline-methods component) nil))
+  (when (slot-boundp component 'inline-methods)
+    (loop for (gf-name method) in (slot-value component 'inline-methods)
+          when (fboundp gf-name)        ; who knows, it could disappear?
+          do (remove-method (symbol-function gf-name) method))
+    (slot-makunbound component 'inline-methods)))
+;; (trace %remove-component-inline-methods)
 
 (defun %define-component-inline-methods (component initargs)
   (let ((names (component-inline-method-names component)))
-    (loop for (keyword value) on initargs by #'cddr
-          with name = (find keyword names :test #'string-equal)
-          when name
-          do (push (list name (funcall value component))
-                   (component-inline-methods component)))))
-
+    (setf (slot-value component 'inline-methods)
+          (loop for (keyword value) on initargs by #'cddr
+                for name = (find keyword names :test #'string-equal)
+                when name
+                collect (list name (funcall value component))))))
+;(trace %define-component-inline-methods)
 
 (defun collect-component-dependencies (component initargs)
   (let ((dependencies ()))
@@ -1452,6 +1488,7 @@ created with the same initargs as the original one.
 
 ;;;;
 ;;;; Finding components
+
 
 (defmethod find-component ((component component) (name-path cons) &optional version)
   (ecase (first name-path)
@@ -2451,8 +2488,8 @@ to `~a` which is not a directory.~@:>"
 
   (:method ((group group) (class class) &rest initargs &key (name (error "name required.")) (version nil)
             &allow-other-keys)
-    (let ((old (find-component group name version)))
-      (cond (old
+    (let ((old (find name (component-unreinitialized-constituents group) :key #'component-name :test #'string-equal)))
+      (cond ((and old (version-satisfies group version))
              (unless (eq (class-of old) class)
                (change-class old class))
              (define-component group
@@ -2464,6 +2501,11 @@ to `~a` which is not a directory.~@:>"
   (:method ((group group) (component component) &key &allow-other-keys)
     "To combine a group with a constituent component, register add the constituent to the
  groups' members and resolve the constituent's location."
+    ;; clean up reinitialization state
+    (setf (component-unreinitialized-constituents group)
+          (remove component (component-unreinitialized-constituents group)))
+    ;; allow just one
+    (setf (component-parent component) group)
     (setf (group-constituents group)
           (append (group-constituents group) (list component)))
     component))
@@ -2829,7 +2871,8 @@ actually-existing directory."
 
 (labels ((compute-method-definition (operator form)
            (destructuring-bind (op qual (o c) &body body) form
-             `(lambda (,c) (defmethod ,operator ,qual ((,o ,op) (,c (eql ,c))) ,@body))))
+             `(lambda (,c) (defmethod ,operator ,qual ((,o ,op) (,c (eql ,c)))
+                             ,@body))))
          (check-op (op)
            (cond ((eq op t) t)
                  ((subtypep op 'operation) op)
