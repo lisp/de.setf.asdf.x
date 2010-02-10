@@ -13,18 +13,19 @@ http://ilc2009.scheming.org/
 
 (defclass test ()
  ((system-name :initarg :system-name :reader test-system-name)
-  (operation-name :initarg :operation-name :reader test-operation-name)
+  (operations :initarg :operations :reader test-operations)
   (already-compiled :initarg :already-compiled :reader test-already-compiled)
   (expected :initarg :expected :reader test-expected)))
 
 (defmacro define-test (test-name system-name 
-                       &key operation-name already-compiled expected)
+                       &key operation-name (operations `(,operation-name))
+                       already-compiled expected)
  `(progn
     (push ',test-name *all-tests*)
     (setf (get ',test-name 'test)
            (make-instance 'test
              :system-name ',system-name
-             :operation-name ',operation-name
+             :operations ',operations
              :already-compiled ',already-compiled
              :expected ',expected))))
 
@@ -83,10 +84,16 @@ http://ilc2009.scheming.org/
              (apply #'format t format-string format-args)
              (terpri)))
      (let ((system-name (test-system-name *test*))
-            (operation-name (test-operation-name *test*)))
+            (operations (test-operations *test*)))
         (check-type system-name symbol)
-        (check-type operation-name symbol)
-        (asdf:operate operation-name system-name))
+        (dolist (operation operations)
+          (check-type operation symbol)
+          (cond ((subtypep operation 'asdf:operation)
+                 (asdf:operate operation system-name))
+                ((fboundp operation)
+                 (funcall operation system-name))
+                (t
+                 (error "Invalid test operation: ~s." operation)))))
      (setq *steps* (nreverse *steps*))
      (loop for steps on *steps* do
         (when (member (first steps) (rest steps) :test #'equal)
