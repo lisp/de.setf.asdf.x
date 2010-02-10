@@ -15,36 +15,49 @@ and reimplement them. It aims to
 *   facilitate maintenance and further developement by expressing the terms for
 the interpretation in the model fields and exposing the logic in the operator interfaces
 *   provide a layered definition mechanism
-    *   a well-defined macro layer
-    *   a well-defined set of definition operators
+    *   a well-defined macro layer; see [defsystem](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L512),
+defcomponent, defmodule, defelement
+    *   a well-defined set of definition operators; see [define-system](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2472),
+define-component
     *   component designators which permit inter-module references as well as the current
-intra-module and top-level inter-system
+intra-module and top-level inter-system; see [find-component](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L1456)
 *   model system definition and construction in terms of a static annotated graph
     *   canonical forms for constituent and requirement dependency expressions; see
-canonicalize-component-option and canonicalize-requirement.
+[canonicalize-component-option](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2874)
+and [canonicalize-requirement.](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L1300),
+which attempt a balance between a standard representation and ease of expression should one
+use the function interface
     *   an operate/perform interpreter which applies the annotations to its
-dynamic state as it traverses the dependency graph; see operate, perform.dependency, 
-perform-constituent, and perform-requirement.
+dynamic state as it traverses the dependency graph; see [operate](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L1640),
+[perform.dependency](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2001), 
+[perform-constituent](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2144),
+and [perform-requirement.](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2112)
     *   performance operators which report completion state and permit the interpreter
-to apply warn/fail/ingore rules as per annotation; see compute-performance-status,
-perform(compile-op), perform(load-op), &co
+to apply warn/fail/ingore rules as per annotation; see [compute-performance-status](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2180),
+perform([compile-op](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2300)),
+([load-op](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2352),
+&co
     *   explicit representation and interpretation of self/constituent/requirement
 traversal-order rules; see perform.dependency.
 *   a mechanism which permits to use the package `asdf-user` as the default to load
-system definition files; see load-system-definition.
+system definition files; see [load-system-definition](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2359).
 *   a mechanism which locates and loads component and operator class definitions on-demand
-in the same manner as system definition files; see context-find-class.
+in the same manner as system definition files; see [context-find-class](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2498).
 *   explicit declarations for the implicit reflexive and transitive requirment relations
 like "compile before loading" and "load requirements before compiling"; see canonicalize-requirement,
-reflexive-operations, and transitive-operations
+[reflexive-operations](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L951),
+and [transitive-operations](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L956)
 *   reformulate the method combination with `restart` and `dependency` qualifiers to account
 for their purpose, and factor the respective behaviour into the component class model; see
-standard-asdf-method-combination, perform.restart, perform.dependency
+[standard-asdf-method-combination](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L548),
+[restartable-component](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L970),
+[perform.restart](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L1964),
+[perform.dependency](http://github.com/lisp/de.setf.asdf.x/blob/518eb571e0c8a13d95ee2737c681cec5379be51e/asdf-x.lisp#L2001)
 
 
 The implementation intends plug-compatibility with ASDF as of +/- version 1.5,
 with one significant distinction. Given that it compiles a complete graph
-from the system definitions[1], and traverses that static graph to perform
+from the system definitions, and traverses that static graph to perform
 operations contingent on its dynamic state and the results of respective
 `(operator x component)` combinations, the graph walk does not follow the same
 path as the original. This means that, for example
@@ -77,7 +90,9 @@ propagation is expressed as
     (remote-operation target-node)
 local state change is expressed as
     (:setting value)
-*   interprets preformance results in the context of local settings to warn, error, or proceed.
+The setting side-effects serve, for example, to express weak and contingent dependencies as
+changes to  failure- or missing-behaviour rather than graph modifications.
+*   interprets performance results in the context of local settings to warn, error, or proceed.
 
 
 Status
@@ -98,8 +113,4 @@ It defines and resides in the package `asdf.x`, to which, iff no `asdf` package 
 is added as a nickname. As such, it should coexist with an exisiting ASDF for examination
 purposes.
 
-
-
-[1]: weak and contingent dependencies are implemented as annotations rather
- than graph modifications.
 
