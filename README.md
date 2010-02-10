@@ -2,8 +2,6 @@
  <title>ASDF.eXperimental</title>
 </head>
 
-
-
 ASDF.X: an experimental feature-equivalent direct substitute for another system definition facility
 -------
 
@@ -13,6 +11,7 @@ In particular, it acts on the temporal properties of load and compile-file event
 with repect to lisp source files. 
 This version is an experimental deconstruction to isolate the core functions
 and reimplement them. It aims to
+
 *   facilitate maintenance and further developement by expressing the terms for
 the interpretation in the model fields and exposing the logic in the operator interfaces
 *   provide a layered definition mechanism
@@ -49,6 +48,7 @@ from the system definitions[1], and traverses that static graph to perform
 operations contingent on its dynamic state and the results of respective
 `(operator x component)` combinations, the graph walk does not follow the same
 path as the original. This means that, for example
+
 *   nodes are examined as many times as they appear in the graph and subject to
 re-performance if their state changes or the environment changes
 *   featurea are interpreted dynamically rather than at the outset.
@@ -63,7 +63,8 @@ method:
         perform-requirement (op-self self required-op required-component)
         -> component-dependency-requirements
 
-This subsumes the current `traverse` operator. It acts as follows;
+This subsumes the current `traverse` operator. It acts as follows
+
 *   establish a standard processor state for each (operator x component) invocation
 *   assert any settings declared for the combination
 *   peforms the local operation and/or propagates local and transitive operations according to
@@ -84,6 +85,7 @@ Status
 
 The `asdf.lisp` contains the core functionality only. Other facilities have been factored
 out to respective files for safe-keeping.
+
 *   `asdf-configure.lisp` : the configuration facility
 *   `asdf-sbcl.lisp` : sbcl-specific code
 *   `asdf-pathname-resolver.lisp` : the aol/abl facility
