@@ -431,7 +431,9 @@ and NIL NAME and TYPE components"
   #+gcl
   (system:getenv x)
   #+ecl
-  (si:getenv x))
+  (si:getenv x)
+  #+mcl
+  (progn x nil))
 
 (defun ensure-directory-pathname (pathspec)
   "Converts the non-wild pathname designator PATHSPEC to directory form."
@@ -630,7 +632,8 @@ and NIL NAME and TYPE components"
    (maintainer :accessor system-maintainer :initarg :maintainer)
    (licence :accessor system-licence :initarg :licence
             :accessor system-license :initarg :license)
-   (source-file :reader system-source-file :initarg :source-file
+   (source-file :initform nil
+                :reader system-source-file :initarg :source-file
                 :writer %set-system-source-file)))
 
 ;;;; -------------------------------------------------------------------------
@@ -870,11 +873,13 @@ to `~a` which is not a directory.~@:>"
 (defun merge-component-relative-pathname (pathname name type)
   (multiple-value-bind (relative path filename)
       (split-path-string name)
-  (merge-pathnames
-   (or pathname (make-pathname :directory `(,relative ,@path)))
-   (if type
-       (make-pathname :directory nil :name filename :type type)
-       filename))))
+    (let ((*default-pathname-defaults*
+           (make-pathname :name nil :type nil :directory nil :host nil)))
+      (merge-pathnames
+       (or pathname (make-pathname :directory `(,relative ,@path)))
+       (if type
+         (make-pathname :name filename :type type)
+         filename)))))
 
 (defmethod component-relative-pathname ((component source-file))
   (merge-component-relative-pathname
@@ -992,35 +997,26 @@ to `~a` which is not a directory.~@:>"
 (defmethod input-files ((operation operation) (c module)) nil)
 
 (defmethod operation-done-p ((o operation) (c component))
-  (flet ((fwd-or-return-t (file)
-           (let ((date (safe-file-write-date file)))
-             (cond
-               (date)
-               (t
-                (warn "~@<Missing FILE-WRITE-DATE for ~S: treating ~
-                       operation ~S on component ~S as done.~@:>"
-                      file o c)
-                (return-from operation-done-p t))))))
-    (let ((out-files (output-files o c))
-          (in-files (input-files o c)))
-      (cond ((and (not in-files) (not out-files))
-             ;; arbitrary decision: an operation that uses nothing to
-             ;; produce nothing probably isn't doing much
-             t)
-            ((not out-files)
-             (let ((op-done
-                    (gethash (type-of o)
-                             (component-operation-times c))))
-               (and op-done
-                    (>= op-done
-                        (apply #'max
-                               (mapcar #'fwd-or-return-t in-files))))))
-            ((not in-files) nil)
-            (t
-             (and
-              (every #'probe-file out-files)
-              (> (apply #'min (mapcar #'safe-file-write-date out-files))
-                 (apply #'max (mapcar #'fwd-or-return-t in-files)))))))))
+  (let ((out-files (output-files o c))
+        (in-files (input-files o c)))
+    (cond ((and (not in-files) (not out-files))
+           ;; arbitrary decision: an operation that uses nothing to
+           ;; produce nothing probably isn't doing much
+           t)
+          ((not out-files)
+           (let ((op-done
+                  (gethash (type-of o)
+                           (component-operation-times c))))
+             (and op-done
+                  (>= op-done
+                      (apply #'max
+                             (mapcar #'safe-file-write-date in-files))))))
+          ((not in-files) nil)
+          (t
+           (and
+            (every #'probe-file out-files)
+            (> (apply #'min (mapcar #'safe-file-write-date out-files))
+               (apply #'max (mapcar #'safe-file-write-date in-files))))))))
 
 ;;; So you look at this code and think "why isn't it a bunch of
 ;;; methods".  And the answer is, because standard method combination
@@ -2187,9 +2183,12 @@ with a different configuration, so the configuration would be re-read then."
 
 (defun collect-asd-subdirectories (directory &key (exclude *default-exclusions*) collect)
   (let* ((files (ignore-errors
-                  (directory (merge-pathnames #P"**/*.asd" directory)
-                             #+sbcl #+sbcl :resolve-symlinks nil
-                             #+clisp #+clisp :circle t)))
+                 #+sbcl
+                 (directory (merge-pathnames #P"**/*.asd" directory) :resolve-symlinks nil)
+                 #+clisp
+                 (directory (merge-pathnames #P"**/*.asd" directory) :circle t)
+                 #-(or sbcl clisp)
+                 (directory (merge-pathnames #P"**/*.asd" directory))))
          (dirs (remove-duplicates (mapcar #'pathname-sans-name+type files) :test #'equal)))
     (loop
      :for dir :in dirs

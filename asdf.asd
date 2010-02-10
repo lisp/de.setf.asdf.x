@@ -16,8 +16,11 @@
   :components
   ((:file "asdf")
    #+ecl (:file "asdf-ecl" :depends-on ("asdf"))
+   #+windows (:file "asdf-windows" :depends-on ("asdf"))
    (:module :de.setf
     :pathname #p"LIBRARY:de;setf;utility;asdf;"
     :components ((:file "patches")
+                 (:file "operators")
                  (:file "hierarchical-names")
-                 (:file "contingent-on")))))
+                 (:file "contingent-on")))
+   #+sbcl(:file "asdf-sbcl" :depends-on ("asdf"))))
