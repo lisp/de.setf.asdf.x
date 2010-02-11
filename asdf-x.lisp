@@ -100,6 +100,7 @@
            #:compile-op
            #:load-op
            #:load-source-op
+           #:registered-system
            #:feature                 ; sort-of operation
            #:version                 ; metaphorically sort-of an operation
            
@@ -190,7 +191,6 @@
            #:pathname-sans-name+type
            #:perform-constituent
            #:perform-requirement
-           #:registered-system
            #:restart
            #:resolve-symlinks
            #:system-registered-p))
@@ -209,7 +209,6 @@
                 #:pathname-sans-name+type
                 #:perform-constituent
                 #:perform-requirement
-                #:registered-system
                 #:restart
                 #:resolve-symlinks
                 #:system-registered-p))
@@ -296,17 +295,20 @@ Defaults to `t`.")
 
 (defvar *operation-force* nil)
 
-(deftype warning-behaviour () '(member :warn :error :ignore nil))
-(deftype failure-behaviour () '(member :warn :error :ignore nil))
-(deftype missing-behaviour () '(member :warn :error :ignore))
+(deftype warning-behaviour () '(member :warn :error :ignore :continue nil))
+(deftype failure-behaviour () '(member :warn :error :ignore :continue nil))
+(deftype missing-behaviour () '(member :warn :error :ignore :continue))
+(deftype success-behaviour () '(member :force :continue))
 
 (defvar +operation-failure-behaviour+ #+sbcl :error #-sbcl :warn)
 (defvar +operation-missing-behaviour+ :warn)
-(defvar *operation-warning-behaviour* :warn)
+(defvar +operation-warning-behaviour+ :warn)
+(defvar +operation-success-behaviour+ :continue)
 
 (defvar *operation-failure-behaviour* +operation-failure-behaviour+)
 (defvar *operation-missing-behaviour* +operation-missing-behaviour+)
-(defvar *operation-warning-behaviour* *operation-warning-behaviour*)
+(defvar *operation-warning-behaviour* +operation-warning-behaviour+)
+(defvar *operation-success-behaviour* +operation-success-behaviour+)
 (defvar *operation-circular-behaviour* :error)          ; not dynamically rebound
 
 
@@ -332,6 +334,24 @@ Defaults to `t`.")
 
 (defvar +traversal-order+ :postorder)
 
+;;; these values are the way they are 'cause that's the way it was.
+;;; they should not be this way. they should be () and the system/module
+;;; should be specialized.
+(defvar +module-classes+ '((:file . cl-source-file))
+  "The class map with which the `module` class will be initialized.")
+(defvar +system-classes+ '((:file . cl-source-file))
+  "The class map with which the `module` class will be initialized.")
+
+;;; these values are the way they are 'cause that's the way it was.
+
+;;; these values are the way they are 'cause that's the way it was.
+;;; they should not be this way. the component values should be ()
+(defvar +component-transitive-operations+ '((compile-op load-op)))
+(defvar +component-reflexive-operations+ '((load-op compile-op)))
+(defvar +source-file-transitive-operations+ '((compile-op load-op)))
+(defvar +source-file-reflexive-operations+ '((load-op compile-op)))
+(defvar +module-transitive-operations+ '((t t)))
+
 (defvar *traversal-order* +traversal-order+
   "Specifies the order of operation action between a group proper and
  its constituents.
@@ -347,7 +367,7 @@ Defaults to `t`.")
  list.")
 
 (defparameter +asdf-requirement-names+
-  '(:do-first :in-order-to :depends-on :weakly-depends-on)
+  '(:do-first :in-order-to :depends-on :weakly-depends-on :strongly-depends-on)
   "The list of requirements which will be recognized in component initialization argument
  list when constructing the dependency links.")
 
@@ -400,6 +420,7 @@ which evaluates to a pathname. For example:
   (:method ((name symbol))
     (ecase name                         ; anything else-> its own method
       (:warning-behaviour *operation-warning-behaviour*)
+      (:success-behaviour *operation-success-behaviour*)
       (:failure-behaviour *operation-failure-behaviour*)
       (:missing-behaviour *operation-missing-behaviour*)
       (:central-registry *central-registry*)
@@ -415,6 +436,11 @@ which evaluates to a pathname. For example:
  and sets the global parameter.")
   (:method ((value t) (name t))
     (error "Invalid setting: ~s, ~s." name value))
+
+  (:method (value (name (eql :success-behaviour)))
+    (if (typep value 'success-behaviour)
+      (setq *operation-success-behaviour* value)
+      (call-next-method)))
 
   (:method (value (name (eql :warning-behaviour)))
     (if (typep value 'warning-behaviour)
@@ -446,7 +472,7 @@ which evaluates to a pathname. For example:
   (:method ((value t) (name (eql ':package)))
     (setq *package* (or (find-package name) (error "Package not found: ~s" name))))
 
-  (:method ((value list) (name (eql :force)))
+  (:method ((value symbol) (name (eql :force)))
     (setq *operation-force* value))
 
   (:method ((value t) (name (eql :traversal-order)))
@@ -455,7 +481,8 @@ which evaluates to a pathname. For example:
 (defmacro with-standard-operation-behaviour (&rest body)
   `(let ((*operation-failure-behaviour* +operation-failure-behaviour+)
          (*operation-missing-behaviour* +operation-missing-behaviour+)
-         (*operation-warning-behaviour* *operation-warning-behaviour*)
+         (*operation-warning-behaviour* +operation-warning-behaviour+)
+         (*operation-success-behaviour* +operation-success-behaviour+)
          (*traversal-order* +traversal-order+))
      ,@body))
 
@@ -908,7 +935,7 @@ created with the same initargs as the original one.
     :accessor component-description)
    (requirement-names
     :initform +asdf-requirement-names+ :allocation :class
-    :accessor component-requirement-names
+    :reader component-requirement-names
     :documentation "The list of asdf dependency relations for which performance requirements
      will be incorporated into the component when it is updated.
      (see component-dependency-requirements)")
@@ -956,9 +983,9 @@ created with the same initargs as the original one.
     :documentation "A cached a-list which relates operations types to their
      input files. It is computed on-demand based on the declared reflexive
      operations.")
-   (operation-times
+   (operation-tags
     :initform (make-hash-table)
-    :accessor component-operation-times)
+    :accessor component-operation-tags)
    ;; XXX we should provide some atomic interface for updating the
    ;; component properties
    (properties
@@ -981,12 +1008,12 @@ created with the same initargs as the original one.
      be generated when the component is instantiated or reinitialized. The initial
      value is that of `+asdf-methods+`")
    (reflexive-operations
-    :initform nil :allocation :class
+    :initform +component-reflexive-operations+ :allocation :class
     :reader component-reflexive-operations
     :documentation "The operational dependencies automatically generated
  for operations on the component itelf.")
    (transitive-operations
-    :initform '((compile-op load-op)) :allocation :class
+    :initform +component-transitive-operations+ :allocation :class
     :reader component-transitive-operations
     :documentation "The operational dependencies automatically generated
  from operations on the component to operations on a required component.")
@@ -1027,13 +1054,18 @@ created with the same initargs as the original one.
   ((constituents
     :accessor module-components)
    (classes
-    :initform '((:file . cl-source-file)) :allocation :class)
+    :initform +module-classes+ :allocation :class)
    (settings
-    :initform '(:traversal-order (:requirements :constituents)))))
+    :initform '(:traversal-order (:requirements :constituents)))
+   (transitive-operations
+    :initform +module-transitive-operations+ :allocation :class
+    :documentation "The module operational dependencies by default pass everything through.")))
 
 
 (defclass system (group)
-  ((long-description
+  ((classes
+    :initform +system-classes+ :allocation :class)
+   (long-description
     :initform nil  :initarg :long-description
     :accessor system-long-description)
    (author
@@ -1078,9 +1110,9 @@ created with the same initargs as the original one.
     :documentation "Caches the output files for the respective reference file for
  specific to each operation type.")
    (reflexive-operations
-    :initform '((load-op compile-op)))
-   (transitiveive-operations
-    :initform '((compile-op load-op))))
+    :initform +source-file-reflexive-operations+ :allocation :class)
+   (transitive-operations
+    :initform +source-file-transitive-operations+ :allocation :class))
    (:documentation "A source-file is a file which implements a reflexive
      compile-before-load performance constraint."))
           
@@ -1125,6 +1157,9 @@ created with the same initargs as the original one.
     :reader operation-time
     :documentation "The universal time at which the operation - or
      the respective parent operation, was created.")
+   (:cycle
+    :initform (gensym "OP-CYCLE-") :initarg :cycle
+    :reader operation-cycle)
    (classes
     :initform () :allocation :class))
   (:documentation "An operation embodies the logic to perform some task.
@@ -1159,6 +1194,7 @@ created with the same initargs as the original one.
       the operation and the constrained value - a component or a feature,
       which returns true iff the test is satisfied.")))
 
+(defstruct (operation-tag (:type list)) cycle time)
 
 ;;;; ------------------------------------------------------------------------
 ;;;; methods: component
@@ -1188,12 +1224,13 @@ created with the same initargs as the original one.
                               &key
                               (force nil f-s)
                               perform explain output-files operation-done-p   ; permits method
-                              depends-on weakly-depends-on in-order-to do-first         ; permits dependencies
+                              depends-on weakly-depends-on strongly-depends-on
+                              in-order-to do-first         ; permits dependencies
                               pathname
                               missing-behaviour failure-behaviour warning-behaviour)
   "coerce the name and organize settings, canonicalize pathnames"
    (declare (ignore perform explain output-files operation-done-p
-                   depends-on weakly-depends-on in-order-to do-first
+                   depends-on weakly-depends-on in-order-to do-first strongly-depends-on
                    pathname))
   (slot-makunbound component 'constituency-requirements)       ; computed on-demand
   (slot-makunbound component 'dependency-requirements)          ; computed on-demand
@@ -1361,7 +1398,11 @@ created with the same initargs as the original one.
                                            requirements))))))
 
   (:method ((name (eql :weakly-depends-on)) (requirements cons) (t-ops t))
-    `((t (:operation-missing-behaviour :ignore)
+    `((t (:missing-behaviour :ignore)
+         ,@(rest (first (canonicalize-requirement :depends-on requirements t-ops))))))
+
+  (:method ((name (eql :strongly-depends-on)) (requirements cons) (t-ops t))
+    `((t (:success-behaviour :force)
          ,@(rest (first (canonicalize-requirement :depends-on requirements t-ops))))))
 
   (:method ((name (eql :do-first)) (requirements list) (t-ops t))
@@ -1375,26 +1416,42 @@ created with the same initargs as the original one.
   "The base method for a component succeeds"
   *status-succeeded*)
 
-(defgeneric component-operation-time (component operation)
+(defun component-operation-time (component operation)
+  (operation-tag-time (component-operation-tag component (type-of operation))))
+
+(defun (setf component-operation-time) (time component operation)
+  (setf (operation-tag-time (component-operation-tag component (type-of operation)))
+        time))
+
+
+(defun component-operation-cycle (component operation)
+  (operation-tag-cycle (component-operation-tag component (type-of operation))))
+
+(defun (setf component-operation-cycle) (cycle component operation)
+  (setf (operation-tag-cycle (component-operation-tag component (type-of operation)))
+        cycle))
+
+
+(defgeneric component-operation-tag (component operation)
   (:method ((component component) (operation operation))
-    (component-operation-time component (type-of operation)))
+    (component-operation-tag component (type-of operation)))
   (:method ((component component) (operation symbol))
-    (or (gethash operation (component-operation-times component))
-        most-negative-fixnum)))
+    (or (gethash operation (component-operation-tags component))
+        (setf (gethash operation (component-operation-tags component))
+              (make-operation-tag :time most-negative-fixnum :cycle nil)))))
 
-
-(defgeneric (setf component-operation-time) (time component operation)
-  (:method (time (component component) (operation operation))
-    (setf (component-operation-time component (type-of operation)) time))
-  (:method (time (component component) (operation symbol))
-    (setf (gethash operation (component-operation-times component))
-          time)))
+(defgeneric (setf component-operation-tag) (tag component operation)
+  (:method (tag (component component) (operation operation))
+    (setf (component-operation-tag component (type-of operation)) tag))
+  (:method (tag (component component) (operation symbol))
+    (setf (gethash operation (component-operation-tags component))
+          tag)))
 
 
 (defmethod component-system ((component component))
   (component-system (component-parent component)))
 
-
+#+(or )
 (defmethod component-pathname ((component component))
   "The value should be set when the component is combined with a group. This logic
  also permits that to be defered - if the group location is unknown, or the system root
@@ -1443,6 +1500,11 @@ created with the same initargs as the original one.
   (:method ((component component) (pathname null) (name string))
     (let ((*default-pathname-defaults* +null-pathname+))
       (values nil (make-pathname :directory '(:relative) :name name))))
+
+  (:method ((component source-file) (pathname null) (name string))
+    (let ((*default-pathname-defaults* +null-pathname+))
+      (values nil (make-pathname :directory '(:relative) :name name
+                                 :type (source-file-type component)))))
 
   (:method ((component group) (pathame null) (name string))
     (let ((*default-pathname-defaults* +null-pathname+))
@@ -1564,7 +1626,7 @@ created with the same initargs as the original one.
        visible use-case. it reads as if the expected effect is the same as try-next)")
 
   (:method ((group group))
-    (ecase (getf (component-settings group) :operation-failure-behaviour)
+    (ecase (getf (component-settings group) :failure-behaviour :error)
       (:error :fail)
       (:continue :try-next)
       (:ignore :ignore))))
@@ -1575,11 +1637,17 @@ created with the same initargs as the original one.
                   ((:fail :error) :error)
                   ((:try-next :continue) :continue)
                   ((:ignore) :ignore)))
-    (setf (getf (component-settings group) :operation-failure-behaviour)
+    (setf (getf (component-settings group) :failure-behaviour)
           value)
-    (setf (getf (component-settings group) :operation-missing-behaviour)
+    (setf (getf (component-settings group) :missing-behaviour)
           value)))
 
+
+(defmethod operation-done-p ((o operation) (c group))
+  "In addition to the base tests, all group constituents must be utd."
+  (and (call-next-method)
+       (dolist (constituent (component-constituents c) t)
+         (unless (operation-done-p o constituent) (return nil)))))
 
 ;;;; ------------------------------------------------------------------------
 ;;;; Methods: static file
@@ -1843,13 +1911,28 @@ to `~a` which is not a directory.~@:>"
 (defmethod shared-initialize ((operation operation) (slots t) &rest initargs
                               &key
                               (force nil f-s)
-                              parent (time (if parent (operation-time parent) (get-universal-time)))
-                              settings)
+                              (on-failure nil of-s)
+                              (on-warnings nil ows-s) (on-warning on-warnings ow-s)
+                              (on-success nil os-s)
+                              parent (time (if parent (operation-time parent) (get-universal-time))))
   "just coerce the name and organize settings"
   (apply #'call-next-method operation slots
-         :settings settings :time time
+         :time time
          initargs)
-  (when f-s (setf (getf (operation-settings operation) :force) force)))
+  (when f-s (setf (getf (operation-settings operation) :force) force))
+  (when of-s
+    (assert (typep on-failure 'failure-behaviour) ()
+            "Invalid failure behaviour: ~s." on-failure)
+    (setf (getf (operation-settings operation) :failure-behaviour) on-failure))
+  (when (or ow-s ows-s)
+    (assert (typep on-warnings 'warning-behaviour) ()
+            "Invalid warning behaviour: ~s." on-warnings)
+    (setf (getf (operation-settings operation) :warning-behaviour) on-warning))
+  (when os-s
+    (assert (typep on-success 'success-behaviour) ()
+            "Invalid success behaviour: ~s." on-success)
+    (setf (getf (operation-settings operation) :success-behaviour) on-success)))
+
 
 (defmethod print-object ((o operation) stream)
   (print-unreadable-object (o stream :type t :identity t)
@@ -1884,12 +1967,14 @@ to `~a` which is not a directory.~@:>"
            (apply #'make-instance (context-find-class operation type)
                   :parent operation :force nil
                   :time (operation-time operation)
+                  :cycle (operation-cycle operation)
                   :original-initargs args args))
           ((subtypep (type-of operation) type)
            operation)
           (t
            (apply #'make-instance (context-find-class operation type)
                   :time (operation-time operation)
+                  :cycle (operation-cycle operation)
                   :parent operation :original-initargs args args)))))
 
 
@@ -1939,26 +2024,54 @@ to `~a` which is not a directory.~@:>"
         (list (component-pathname component)))))
 
 
-(defmethod input-files ((operation operation) (c module)) nil)
+(defmethod input-files ((operation operation) (c group)) nil)
 
 (defmethod output-files ((o operation) (c component)) nil)
 
+
 (defmethod operation-done-p ((o operation) (c component))
-  (let ((out-files (output-files o c))
-        (in-files (input-files o c)))
-    (cond ((and (not in-files) (not out-files))
-           ;; arbitrary decision: an operation that uses nothing to
-           ;; produce nothing probably isn't doing much
-           t)
-          ((not out-files)
-           (>= (component-operation-time c o)
-               (reduce #'max in-files :key #'safe-file-write-date )))
-          ((not in-files) nil)
-          (t
-           (and
-            (every #'probe-file out-files)
-            (> (apply #'min (mapcar #'safe-file-write-date out-files))
-               (apply #'max (mapcar #'safe-file-write-date in-files))))))))
+  ;; the component must be u-t-d  and all required components
+  ;; for the op must be u-t-d
+  (let ((predecessors (compute-operation-predecessors o c)))
+    (or
+     ;; either, already performed this operation on this cycle, or
+     (eq (component-operation-cycle c o) (operation-cycle o))
+     ;; not forced, and all predecessors are done, and internal state is done
+     (and
+      (not *operation-force*)
+      (or (null predecessors)
+          ;; given required components, in order to
+          (every #'(lambda (p)
+                     (let* ((pc (find-component (component-parent c) p))
+                           (pc-dp (and pc (operation-done-p o pc)))
+                           (p-cycle (and pc (component-operation-cycle pc o)))
+                           (o-cycle (operation-cycle o))
+                           (ceq (eq p-cycle o-cycle)))
+                       (and pc-dp (not ceq))))
+                 predecessors))
+      (operation-files-done-p o c)))))
+
+
+;;; this factors the file aspects of the about out for eventual specialization on
+;;; source-file or file
+
+(defgeneric operation-files-done-p (operation component)
+  (:method ((o operation) (c component))
+    (let ((out-files (output-files o c))
+          (in-files (input-files o c))
+          (component-time (component-operation-time c o)))
+      (cond ((and (not in-files) (not out-files))
+             ;; arbitrary decision: an operation that uses nothing to
+             ;; produce nothing probably isn't doing much
+             t)
+            ((not out-files)
+             (> component-time
+                (reduce #'max in-files :key #'safe-file-write-date )))
+            ((not in-files) nil)
+            (t (and
+                (every #'probe-file out-files)
+                (> (apply #'min (mapcar #'safe-file-write-date out-files))
+                   (apply #'max (mapcar #'safe-file-write-date in-files)))))))))
 
 
 
@@ -2028,7 +2141,8 @@ to `~a` which is not a directory.~@:>"
                                (format s "~@<Continue, treating ~S on ~S as ~
                                           having been successful.~@:>"
                                        operation component))
-                  (setf (component-operation-time component operation) (get-universal-time))
+                  (setf (component-operation-time component operation) (get-universal-time)
+                        (component-operation-cycle component operation) (operation-cycle operation))
                   (return (values *status-succeeded* operation))))))))
 
 
@@ -2097,7 +2211,7 @@ to `~a` which is not a directory.~@:>"
                                                                  (funcall traversal-operator operation component
                                                                           required-operation required-component)
                                               (etypecase (setf requirement-status
-                                                               (compute-performance-status component-operation component requirement-status))
+                                                               (compute-performance-status component-operation effective-component requirement-status))
                                                 (status-aborted
                                                  (return-from perform (values requirement-status effective-component)))
                                                 (performance-failed
@@ -2107,9 +2221,11 @@ to `~a` which is not a directory.~@:>"
                                   do (setf (setting setting) value))))))
 
              (perform-constituents ()
+               (setq *operation-success-behaviour* :continue)
                (perform-traversal #'perform-constituent (component-constituency-requirements component)))
 
              (perform-requirements ()
+               (setq *operation-success-behaviour* :continue)
                (perform-traversal #'perform-requirement (component-dependency-requirements component)))
 
              (perform-component ()
@@ -2121,14 +2237,11 @@ to `~a` which is not a directory.~@:>"
       (print (list (type-of operation) component 
                    :done-p (operation-done-p operation component)
                    :force *operation-force*
-                   :c-o-t (component-operation-time component operation)
+                   :c-o-tag (component-operation-tag component operation)
                    :o-t (operation-time operation)))
       (cond ((find tag *operation-stack* :test #'equal)
              (setf performance-status *status-circular*))
-            ((and (operation-done-p operation component)
-                  (or (not *operation-force*)
-                      (>= (component-operation-time component operation)
-                          (operation-time operation))))
+            ((operation-done-p operation component)
              ;; if the operation is already complete - modulo forcing, indicate (yes no)
              (setf performance-status *status-skipped*))
             (t
@@ -2138,7 +2251,8 @@ to `~a` which is not a directory.~@:>"
                    (apply #'call-with-settings #'traverse settings)
                    (traverse))))))
       (when (typep performance-status 'performance-complete)
-        (setf (component-operation-time component operation) (get-universal-time)))
+        (setf (component-operation-time component operation) (get-universal-time)
+              (component-operation-cycle component operation) (operation-cycle operation)))
       (values performance-status component))))
 
 
@@ -2223,7 +2337,21 @@ to `~a` which is not a directory.~@:>"
 
   ;; simple status are left alone
   (:method ((operation t) (component t) (status performance-complete) &key &allow-other-keys)
+    (ecase *operation-success-behaviour*
+      (:continue )
+      (:force (setq *operation-force* t)))
     status)
+
+  ;; if some strongly dependent requirement succeeded, force subsequent (normally, constituent) operations
+  (:method ((operation t) (component t) (status status-skipped) &key &allow-other-keys)
+    (ecase *operation-success-behaviour*
+      (:continue )
+      (:force
+       (when (eq (component-operation-cycle component operation)
+                 (operation-cycle operation))
+         (setq *operation-force* t))))
+    status)
+
   (:method ((operation t) (component t) (status performance-incomplete) &key &allow-other-keys)
     status)
 
@@ -2297,28 +2425,35 @@ to `~a` which is not a directory.~@:>"
 
 
 
-(defgeneric compute-operation-predecessors (component operation)
-  (:documentation "Given component and operation instances, return an association list
+(defgeneric compute-operation-predecessors (operation component)
+  (:documentation "Given operation and component instances, return an association list
  which specifies operations to be performed on predecessors. Each element has the form
    (operation predecessor-name . arguments)
  where the predecessor name is to be resolved in the context component's parent.")
-
-  (:method ((context t) (operation operation) )
-    (compute-operation-predecessors context (type-of operation)))
-
-  (:method ((component component) (operation t))
-    (compute-operation-predecessors (component-dependency-requirements component) operation))
-
-  (:method ((dependency-definitions list) (operation-type symbol))
-    ;; return multiple predecessor lists in the order of appearance
-    (loop for (operation . requirements) in dependency-definitions
-         when (or (subtypep operation operation-type)
-                   (eq operation t))
-          append (mapcar #'(lambda (requirement)
-                             (if (eq (first requirement) t)
-                               (cons operation-type (rest requirement))
-                               requirement))
-                         requirements))))
+  
+  (:method ((operation operation) (context t) )
+    (compute-operation-predecessors (type-of operation) context))
+  
+  (:method ((operation t) (component component))
+    (remove component
+            (compute-operation-predecessors operation (component-dependency-requirements component))))
+  
+  (:method ((operation-type symbol) (dependency-definitions list))
+    ;; return a single list of component designators in order of appearance
+    (let ((predecessors ()))
+      (loop for (r-operation . requirements) in dependency-definitions
+            when (subtypep operation-type r-operation)
+            do (loop for (required-operation . arguments) in requirements
+                     do (etypecase required-operation
+                          (keyword )            ; ignore settings
+                          (symbol (dolist (required-component arguments)
+                                    (setf required-component
+                                          (etypecase required-component
+                                            ((or component string symbol) required-component)
+                                            (cons (first required-component))))
+                                    (pushnew required-component predecessors
+                                             :test #'string-equal))))))
+      (nreverse predecessors))))
 
 
 
@@ -2351,20 +2486,6 @@ to `~a` which is not a directory.~@:>"
 (defmethod output-files ((operation compile-op) (c cl-source-file))
   #-:broken-fasl-loader (list (compile-file-pathname (component-pathname c)))
   #+:broken-fasl-loader (list (component-pathname c)))
-
-(defmethod initialize-instance ((instance compile-op) &rest initargs
-                                &key on-failure on-warnings settings)
-  (assert (typep on-failure 'failure-behaviour) ()
-         "Invalid failure behaviour: ~s." on-failure)
-  (assert (typep on-warnings 'warning-behaviour) ()
-         "Invalid warning behaviour: ~s." on-warnings)
-  (when on-failure
-    (setf settings (list* :operation-failure-behaviour on-failure settings)))
-  (when on-warnings
-    (setf settings (list* :operation-warning-behaviour on-warnings settings)))
-  (apply #'call-next-method instance
-         :settings settings
-         initargs))
 
 
 
@@ -2956,6 +3077,11 @@ actually-existing directory."
     (:method ((type t) (key (eql :settings)) (form t))                       (values key (when form `(quote ,form))))
     (:method ((type system) (key (eql :source-file)) (form string))                  (values key form))
     (:method ((type system) (key (eql :source-file)) (form pathname))                (values key form))
+    (:method ((type t) (key (eql :strongly-depends-on)) (form list))           
+      (values key (when form `(quote ,(mapcar #'rewrite-dependency-def form)))))
+    (:method ((type t) (key (eql :strongly-depends-on)) (form t))
+      (sysdef-error "~a :weakly-depends-on must be a list : ~s" type form))
+    (:method ((type t) (key (eql :success-behaviour)) (form t))              (values key form))
     (:method ((type t) (key (eql :version)) (form t))                        (values key form))
     (:method ((type t) (key (eql :warning-behaviour)) (form t))              (values key form))
     (:method ((type t) (key (eql :weakly-depends-on)) (form list))           
