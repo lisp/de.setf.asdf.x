@@ -343,8 +343,6 @@ Defaults to `t`.")
   "The class map with which the `module` class will be initialized.")
 
 ;;; these values are the way they are 'cause that's the way it was.
-
-;;; these values are the way they are 'cause that's the way it was.
 ;;; they should not be this way. the component values should be ()
 (defvar +component-transitive-operations+ '((compile-op load-op)))
 (defvar +component-reflexive-operations+ '((load-op compile-op)))
@@ -1008,12 +1006,15 @@ created with the same initargs as the original one.
      be generated when the component is instantiated or reinitialized. The initial
      value is that of `+asdf-methods+`")
    (reflexive-operations
-    :initform +component-reflexive-operations+ :allocation :class
+    :initform +component-reflexive-operations+
+    ;; as long as these reflect source file requirements, class allocation is wrong
+    ;; :allocation :class
     :reader component-reflexive-operations
     :documentation "The operational dependencies automatically generated
  for operations on the component itelf.")
    (transitive-operations
-    :initform +component-transitive-operations+ :allocation :class
+    :initform +component-transitive-operations+
+    ;; :allocation :class
     :reader component-transitive-operations
     :documentation "The operational dependencies automatically generated
  from operations on the component to operations on a required component.")
@@ -1054,7 +1055,10 @@ created with the same initargs as the original one.
   ((constituents
     :accessor module-components)
    (classes
-    :initform +module-classes+ :allocation :class)
+    :initform +module-classes+
+    ;; as long as they reflect source-file presumptions
+    ;; :allocation :class
+    )
    (settings
     :initform '(:traversal-order (:requirements :constituents)))
    (transitive-operations
@@ -1064,7 +1068,10 @@ created with the same initargs as the original one.
 
 (defclass system (group)
   ((classes
-    :initform +system-classes+ :allocation :class)
+    :initform +system-classes+
+    ;; as long as they reflect source-file presumptions
+    ;; :allocation :class
+    )
    (long-description
     :initform nil  :initarg :long-description
     :accessor system-long-description)
