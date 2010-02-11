@@ -107,7 +107,15 @@ out to respective files for safe-keeping.
 
 The code is projective, but has built in both mcl-5.2 and sbcl-1.0.35, and is
 operable to the extent that it passed `test/dweinreb-tests.lisp` with modifications for
-the changed model interpretation semantics.
+the changed model interpretation semantics. While one always intends to get things right, the
+present stage make minimal claims to correctness. The intent is to provide a platform
+on which to understand how this build system works and how one might work.
+For example, two immediate questions are
+
+*    which constraints are to propagate between which components in which directions
+*    should the peform.dependency method be combined like normal methods, or should it be
+somehow specific to the class. either delegate to an additional operator to recognize
+an independent combination, or combined such that only the most specific is included, or...?
 
 It defines and resides in the package `asdf.x`, to which, iff no `asdf` package is present, that name
 is added as a nickname. As such, it should coexist with an exisiting ASDF for examination
