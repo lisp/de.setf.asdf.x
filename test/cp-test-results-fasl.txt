@@ -1,0 +1,364 @@
+;;; SBCL 1.0.35
+*** error: (#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" "ASDFTEST:system2;module3;"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" "ASDFTEST:system2;module3;file5.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" NIL "ASDFTEST:system2;module3;"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" NIL "ASDFTEST:system2;module3;file5.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" #P"" "ASDFTEST:system2;module3;"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" #P"" "ASDFTEST:system2;module3;file5.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" #P"module2/" "ASDFTEST:system2;module3;"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" #P"module2/" "ASDFTEST:system2;module3;file5.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" "ASDFTEST:system2;module3;"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" "ASDFTEST:system2;module3;file5.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" NIL):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P""):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"file2"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"file2.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"module1-1/"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"module1-1/file3"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"module1-1/file3.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/file4"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/file4.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/file5"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/file5.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"ASDFTEST:SYSTEM2;MODULE3;"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" "ASDFTEST:system2;module3;"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" #P"ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: (#P"ASDFTEST:SYSTEM1;" "ASDFTEST:system2;module3;" "ASDFTEST:system2;module3;file5.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: ("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" "ASDFTEST:system2;module3;"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;
+          ^.
+*** error: ("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" "ASDFTEST:system2;module3;file5.lisp"):
+*** parse error in namestring: logical namestring character which is not alphanumeric or hyphen:
+  #\:
+  ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP
+          ^.
+((#P"/Users/janson/asdf-src/system1/" NIL #P"") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" NIL #P"file2") (NIL NIL #P"/Users/janson/asdf-src/system1/module1/file2" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" NIL #P"module1-1/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module1" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" NIL #P"module1-1/file3") (NIL NIL #P"/Users/janson/asdf-src/system1/module1/module1-1/file3" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" NIL #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" NIL #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" NIL #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" NIL #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" NIL #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"/Users/janson/asdf-src/system1/" NIL "ASDFTEST:system2;module3;") (NIL NIL #P"/Users/janson/asdf-src/system1/module1/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/asdf-src/system1/module1/ASDFTEST:system2;module3;.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" NIL "ASDFTEST:system2;module3;file5.lisp") (NIL NIL #P"/Users/janson/asdf-src/system1/module1/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/asdf-src/system1/module1/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"file2") (NIL NIL #P"/Users/janson/asdf-src/system1/file2" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"module1-1/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"module1-1/file3") (NIL NIL #P"/Users/janson/asdf-src/system1/module1-1/file3" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"/Users/janson/asdf-src/system1/" #P"" "ASDFTEST:system2;module3;") (NIL NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" #P"" "ASDFTEST:system2;module3;file5.lisp") (NIL NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"file2") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file2" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"module1-1/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"module1-1/file3") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/module1-1/file3" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" "ASDFTEST:system2;module3;") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/asdf-src/system1/module2/ASDFTEST:system2;module3;.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" #P"module2/" "ASDFTEST:system2;module3;file5.lisp") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/asdf-src/system1/module2/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"file2") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file2" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"module1-1/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"module1-1/file3") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/module1-1/file3" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" "ASDFTEST:system2;module3;") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" #P"/Users/janson/asdf-src/system2/module3/" "ASDFTEST:system2;module3;file5.lisp") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"file2") (NIL NIL (#P"ASDFTEST:SYSTEM2;MODULE3;FILE2" . #P"/Users/janson/asdf-src/system2/module3/file2") NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"module1-1/") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3" "MODULE1-1") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"module1-1/file3") (NIL NIL (#P"ASDFTEST:SYSTEM2;MODULE3;MODULE1-1;FILE3" . #P"/Users/janson/asdf-src/system2/module3/module1-1/file3") NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" NIL) (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/file1.lisp" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/file1.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "ASDFTEST:system2;module3;") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"file2") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/file2" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/file2.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"file2.lisp") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/file2.lisp" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/file2.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"module1-1/") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/module1-1/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "ASDFTEST:system2;module3;" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"module1-1/file3") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/module1-1/file3" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/module1-1/file3.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"module1-1/file3.lisp") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/module1-1/file3.lisp" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/module1-1/file3.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/file4.lisp") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" NIL NIL)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/file5.lisp") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" NIL NIL)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" "ASDFTEST:system2;module3;") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/ASDFTEST:system2;module3;.lisp")) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" #P"ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" NIL NIL)) 
+((#P"/Users/janson/asdf-src/system1/" "ASDFTEST:system2;module3;" "ASDFTEST:system2;module3;file5.lisp") (NIL #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/asdf-src/system1/ASDFTEST:system2;module3;/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM1" "MODULE1") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module1") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"file2") (NIL NIL (#P"ASDFTEST:SYSTEM1;MODULE1;FILE2" . #P"/Users/janson/asdf-src/system1/module1/file2") NIL)) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"module1-1/") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM1" "MODULE1" "MODULE1-1") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module1" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"module1-1/file3") (NIL NIL (#P"ASDFTEST:SYSTEM1;MODULE1;MODULE1-1;FILE3" . #P"/Users/janson/asdf-src/system1/module1/module1-1/file3") NIL)) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" NIL #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM1") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"file2") (NIL NIL (#P"ASDFTEST:SYSTEM1;FILE2" . #P"/Users/janson/asdf-src/system1/file2") NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"module1-1/") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM1" "MODULE1-1") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"module1-1/file3") (NIL NIL (#P"ASDFTEST:SYSTEM1;MODULE1-1;FILE3" . #P"/Users/janson/asdf-src/system1/module1-1/file3") NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM1" "MODULE2") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"file2") (NIL NIL (#P"ASDFTEST:SYSTEM1;MODULE2;FILE2" . #P"/Users/janson/asdf-src/system1/module2/file2") NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"module1-1/") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM1" "MODULE2" "MODULE1-1") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"module1-1/file3") (NIL NIL (#P"ASDFTEST:SYSTEM1;MODULE2;MODULE1-1;FILE3" . #P"/Users/janson/asdf-src/system1/module2/module1-1/file3") NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"module2/" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"file2") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file2" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"module1-1/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"module1-1/file3") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/module1-1/file3" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" "ASDFTEST:system2;module3;") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;.lisp")) 
+((#P"ASDFTEST:SYSTEM1;" #P"/Users/janson/asdf-src/system2/module3/" "ASDFTEST:system2;module3;file5.lisp") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"file2") (NIL NIL (#P"ASDFTEST:SYSTEM2;MODULE3;FILE2" . #P"/Users/janson/asdf-src/system2/module3/file2") NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"module1-1/") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3" "MODULE1-1") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"module1-1/file3") (NIL NIL (#P"ASDFTEST:SYSTEM2;MODULE3;MODULE1-1;FILE3" . #P"/Users/janson/asdf-src/system2/module3/module1-1/file3") NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system1/module2/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system1/module2/file4") (NIL NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system2/module3/") (NIL NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system2/module3/file5") (NIL NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+((#P"ASDFTEST:SYSTEM1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"ASDFTEST:SYSTEM2;MODULE3;") (NIL NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" NIL NIL) (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/file1.lisp" #P"/Users/janson/ASDFTEST:system1;/module1/file1.lisp")) 
+(("ASDFTEST:system1;" NIL #P"") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "ASDFTEST:system1;" "module1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" NIL #P"file2") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/file2" #P"/Users/janson/ASDFTEST:system1;/module1/file2.lisp")) 
+(("ASDFTEST:system1;" NIL #P"file2.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/file2.lisp" #P"/Users/janson/ASDFTEST:system1;/module1/file2.lisp")) 
+(("ASDFTEST:system1;" NIL #P"module1-1/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/module1-1/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "ASDFTEST:system1;" "module1" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" NIL #P"module1-1/file3") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/module1-1/file3" #P"/Users/janson/ASDFTEST:system1;/module1/module1-1/file3.lisp")) 
+(("ASDFTEST:system1;" NIL #P"module1-1/file3.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/module1-1/file3.lisp" #P"/Users/janson/ASDFTEST:system1;/module1/module1-1/file3.lisp")) 
+(("ASDFTEST:system1;" NIL #P"/Users/janson/asdf-src/system1/module2/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" NIL #P"/Users/janson/asdf-src/system1/module2/file4") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+(("ASDFTEST:system1;" NIL #P"/Users/janson/asdf-src/system1/module2/file4.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" NIL NIL)) 
+(("ASDFTEST:system1;" NIL #P"/Users/janson/asdf-src/system2/module3/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" NIL #P"/Users/janson/asdf-src/system2/module3/file5") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+(("ASDFTEST:system1;" NIL #P"/Users/janson/asdf-src/system2/module3/file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" NIL NIL)) 
+(("ASDFTEST:system1;" NIL #P"ASDFTEST:SYSTEM2;MODULE3;") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" NIL "ASDFTEST:system2;module3;") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/ASDFTEST:system1;/module1/ASDFTEST:system2;module3;.lisp")) 
+(("ASDFTEST:system1;" NIL #P"ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" NIL NIL)) 
+(("ASDFTEST:system1;" NIL "ASDFTEST:system2;module3;file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1/" #P"/Users/janson/ASDFTEST:system1;/module1/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/ASDFTEST:system1;/module1/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+(("ASDFTEST:system1;" #P"" NIL) (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/file1.lisp" #P"/Users/janson/ASDFTEST:system1;/file1.lisp")) 
+(("ASDFTEST:system1;" #P"" #P"") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "ASDFTEST:system1;") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"" #P"file2") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/file2" #P"/Users/janson/ASDFTEST:system1;/file2.lisp")) 
+(("ASDFTEST:system1;" #P"" #P"file2.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/file2.lisp" #P"/Users/janson/ASDFTEST:system1;/file2.lisp")) 
+(("ASDFTEST:system1;" #P"" #P"module1-1/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1-1/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "ASDFTEST:system1;" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"" #P"module1-1/file3") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1-1/file3" #P"/Users/janson/ASDFTEST:system1;/module1-1/file3.lisp")) 
+(("ASDFTEST:system1;" #P"" #P"module1-1/file3.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module1-1/file3.lisp" #P"/Users/janson/ASDFTEST:system1;/module1-1/file3.lisp")) 
+(("ASDFTEST:system1;" #P"" #P"/Users/janson/asdf-src/system1/module2/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"" #P"/Users/janson/asdf-src/system1/module2/file4") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+(("ASDFTEST:system1;" #P"" #P"/Users/janson/asdf-src/system1/module2/file4.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" NIL NIL)) 
+(("ASDFTEST:system1;" #P"" #P"/Users/janson/asdf-src/system2/module3/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"" #P"/Users/janson/asdf-src/system2/module3/file5") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+(("ASDFTEST:system1;" #P"" #P"/Users/janson/asdf-src/system2/module3/file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" NIL NIL)) 
+(("ASDFTEST:system1;" #P"" #P"ASDFTEST:SYSTEM2;MODULE3;") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" #P"" "ASDFTEST:system2;module3;") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;.lisp")) 
+(("ASDFTEST:system1;" #P"" #P"ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" NIL NIL)) 
+(("ASDFTEST:system1;" #P"" "ASDFTEST:system2;module3;file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+(("ASDFTEST:system1;" #P"module2/" NIL) (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/file1.lisp" #P"/Users/janson/ASDFTEST:system1;/module2/file1.lisp")) 
+(("ASDFTEST:system1;" #P"module2/" #P"") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "ASDFTEST:system1;" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"module2/" #P"file2") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/file2" #P"/Users/janson/ASDFTEST:system1;/module2/file2.lisp")) 
+(("ASDFTEST:system1;" #P"module2/" #P"file2.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/file2.lisp" #P"/Users/janson/ASDFTEST:system1;/module2/file2.lisp")) 
+(("ASDFTEST:system1;" #P"module2/" #P"module1-1/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/module1-1/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "ASDFTEST:system1;" "module2" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"module2/" #P"module1-1/file3") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/module1-1/file3" #P"/Users/janson/ASDFTEST:system1;/module2/module1-1/file3.lisp")) 
+(("ASDFTEST:system1;" #P"module2/" #P"module1-1/file3.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/module1-1/file3.lisp" #P"/Users/janson/ASDFTEST:system1;/module2/module1-1/file3.lisp")) 
+(("ASDFTEST:system1;" #P"module2/" #P"/Users/janson/asdf-src/system1/module2/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"module2/" #P"/Users/janson/asdf-src/system1/module2/file4") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+(("ASDFTEST:system1;" #P"module2/" #P"/Users/janson/asdf-src/system1/module2/file4.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" NIL NIL)) 
+(("ASDFTEST:system1;" #P"module2/" #P"/Users/janson/asdf-src/system2/module3/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"module2/" #P"/Users/janson/asdf-src/system2/module3/file5") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+(("ASDFTEST:system1;" #P"module2/" #P"/Users/janson/asdf-src/system2/module3/file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" NIL NIL)) 
+(("ASDFTEST:system1;" #P"module2/" #P"ASDFTEST:SYSTEM2;MODULE3;") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" #P"module2/" "ASDFTEST:system2;module3;") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/ASDFTEST:system1;/module2/ASDFTEST:system2;module3;.lisp")) 
+(("ASDFTEST:system1;" #P"module2/" #P"ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" NIL NIL)) 
+(("ASDFTEST:system1;" #P"module2/" "ASDFTEST:system2;module3;file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/module2/" #P"/Users/janson/ASDFTEST:system1;/module2/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/ASDFTEST:system1;/module2/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" NIL) (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"file2") (#P"/Users/janson/ASDFTEST:system1;/" NIL #P"/Users/janson/asdf-src/system2/module3/file2" NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"file2.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"module1-1/") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"module1-1/file3") (#P"/Users/janson/ASDFTEST:system1;/" NIL #P"/Users/janson/asdf-src/system2/module3/module1-1/file3" NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"module1-1/file3.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system1/module2/") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system1/module2/file4") (#P"/Users/janson/ASDFTEST:system1;/" NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system1/module2/file4.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system2/module3/") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system2/module3/file5") (#P"/Users/janson/ASDFTEST:system1;/" NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"/Users/janson/asdf-src/system2/module3/file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"ASDFTEST:SYSTEM2;MODULE3;") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" "ASDFTEST:system2;module3;") (#P"/Users/janson/ASDFTEST:system1;/" NIL #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;.lisp")) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" #P"ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"/Users/janson/asdf-src/system2/module3/" "ASDFTEST:system2;module3;file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/asdf-src/system2/module3/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" NIL) (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"file2") (#P"/Users/janson/ASDFTEST:system1;/" NIL (#P"ASDFTEST:SYSTEM2;MODULE3;FILE2" . #P"/Users/janson/asdf-src/system2/module3/file2") NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"file2.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"module1-1/") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3" "MODULE1-1") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"module1-1/file3") (#P"/Users/janson/ASDFTEST:system1;/" NIL (#P"ASDFTEST:SYSTEM2;MODULE3;MODULE1-1;FILE3" . #P"/Users/janson/asdf-src/system2/module3/module1-1/file3") NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"module1-1/file3.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system1/module2/") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system1/module2/file4") (#P"/Users/janson/ASDFTEST:system1;/" NIL #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system1/module2/file4.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system2/module3/") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system2/module3/file5") (#P"/Users/janson/ASDFTEST:system1;/" NIL #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"/Users/janson/asdf-src/system2/module3/file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"ASDFTEST:SYSTEM2;MODULE3;") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" #P"ASDFTEST:SYSTEM2;MODULE3;" #P"ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP") (#P"/Users/janson/ASDFTEST:system1;/" NIL NIL NIL)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" NIL) (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/file1.lisp" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/file1.lisp")) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "ASDFTEST:system1;" "ASDFTEST:system2;module3;") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"file2") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/file2" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/file2.lisp")) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"file2.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/file2.lisp" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/file2.lisp")) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"module1-1/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/module1-1/" #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "ASDFTEST:system1;" "ASDFTEST:system2;module3;" "module1-1") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"module1-1/file3") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/module1-1/file3" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/module1-1/file3.lisp")) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"module1-1/file3.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/module1-1/file3.lisp" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/module1-1/file3.lisp")) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system1" "module2") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/file4") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system1/module2/file4" NIL)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system1/module2/file4.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" NIL NIL)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" NIL #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE NIL :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/file5") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/asdf-src/system2/module3/file5" NIL)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"/Users/janson/asdf-src/system2/module3/file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" NIL NIL)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"ASDFTEST:SYSTEM2;MODULE3;") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" NIL (#<LOGICAL-PATHNAME (with no namestring) :HOST #<SB-KERNEL:LOGICAL-HOST "ASDFTEST"> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "SYSTEM2" "MODULE3") :NAME NIL :TYPE "LISP" :VERSION NIL> . #<PATHNAME (with no namestring) :HOST #<SB-IMPL::UNIX-HOST {102CE661}> :DEVICE :UNSPECIFIC :DIRECTORY (:ABSOLUTE "Users" "janson" "asdf-src" "system2" "module3") :NAME NIL :TYPE "lisp" :VERSION NIL>))) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" "ASDFTEST:system2;module3;") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/ASDFTEST:system2;module3;.lisp" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/ASDFTEST:system2;module3;.lisp")) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" #P"ASDFTEST:SYSTEM2;MODULE3;FILE5.LISP") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" NIL NIL)) 
+(("ASDFTEST:system1;" "ASDFTEST:system2;module3;" "ASDFTEST:system2;module3;file5.lisp") (#P"/Users/janson/ASDFTEST:system1;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/ASDFTEST:system2;module3;file5.lisp.lisp" #P"/Users/janson/ASDFTEST:system1;/ASDFTEST:system2;module3;/ASDFTEST:system2;module3;file5.lisp.lisp")) 
+(#P"LIBRARY:DE;SETF;UTILITY;ASDF;CP-TEST-RESULTS-FASL.TXT.NEWEST" :SYSTEM-FAILURES (29 306) :PATHNAME-FAILURES (432 1108)) 
