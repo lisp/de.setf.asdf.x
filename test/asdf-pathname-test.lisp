@@ -1,0 +1,128 @@
+(in-package :asdf)
+
+(unwind-protect
+  (let ((bin-type (pathname-type (compile-file-pathname "test.lisp")))
+        (root (probe-file (user-homedir-pathname)))
+        (system-count 0)
+        (system-failures 0)
+        (file-count 0)
+        (file-failures 0)
+        (*print-pretty* nil))
+    (unless root (error "no home directory: ~s." (user-homedir-pathname)))
+    (with-open-file (result-stream (format nil "LIBRARY:de;setf;utility;asdf;cp-test-results-~a.txt" bin-type)
+                                   :direction :output :if-exists :supersede :if-does-not-exist :create)
+      (format result-stream ";;; ~a ~a~%"
+              (lisp-implementation-type)
+              (lisp-implementation-version))
+      (flet ((src-dir (&rest path) (append (pathname-directory root) (cons "asdf-src" path)))
+             (bin-dir (&rest path) (append (pathname-directory root) (cons "asdf-bin" path))))
+        (setf (logical-pathname-translations "ASDFTEST")
+              `((,(format nil "**;*.~a" bin-type)
+                 ,(make-pathname :directory (bin-dir :wild-inferiors) :name :wild :type bin-type :version nil))
+                (,(format nil "**;*.~a.*" bin-type)
+                 ,(make-pathname :directory (bin-dir :wild-inferiors) :name :wild :type bin-type))
+                ("**;*.*"
+                 ,(make-pathname :directory (src-dir :wild-inferiors) :name :wild :type :wild :version nil))
+                ("**;*.*.*"
+                 ,(make-pathname :directory (src-dir :wild-inferiors) :name :wild :type :wild))))
+        
+        (let ((systems `(,(make-pathname :directory (src-dir "system1") :name nil :type nil)
+                         ,(make-pathname :host "ASDFTEST" :directory '(:absolute "system1"))
+                         "ASDFTEST:system1;"))
+              (modules `(nil ,(make-pathname :directory '(:relative) :name nil :type nil)
+                             ,(make-pathname :directory '(:relative "module2") :name nil :type nil)
+                             ,(make-pathname :directory (src-dir "system2" "module3") :name nil :type nil)
+                             ,(make-pathname :host "ASDFTEST" :directory '(:absolute "system2" "module3") :name nil :type nil)
+                             "ASDFTEST:system2;module3;"))
+              (sources `(nil
+                         ,(make-pathname :directory '(:relative) :name nil :type nil)
+                         ,(make-pathname :directory '(:relative) :name "file2" :type nil)
+                         ,(make-pathname :directory '(:relative) :name "file2" :type "lisp")
+                         ,(make-pathname :directory '(:relative "module1-1") :name nil :type nil)
+                         ,(make-pathname :directory '(:relative "module1-1") :name "file3" :type nil)
+                         ,(make-pathname :directory '(:relative "module1-1") :name "file3" :type "lisp")
+                         ,(make-pathname :directory (src-dir "system1" "module2") :name nil :type nil)
+                         ,(make-pathname :directory (src-dir "system1" "module2") :name "file4" :type nil)
+                         ,(make-pathname :directory (src-dir "system1" "module2") :name "file4" :type "lisp")
+                         ,(make-pathname :directory (src-dir "system2" "module3") :name nil :type nil)
+                         ,(make-pathname :directory (src-dir "system2" "module3") :name "file5" :type nil)
+                         ,(make-pathname :directory (src-dir "system2" "module3") :name "file5" :type "lisp")
+                         ,(make-pathname :host "ASDFTEST" :directory '(:absolute "system2" "module3") :name nil :type nil)
+                         "ASDFTEST:system2;module3;"
+                         ,(make-pathname :host "ASDFTEST" :directory '(:absolute "system2" "module3") :name "file5" :type "lisp")
+                         "ASDFTEST:system2;module3;file5.lisp"))
+              (results nil)
+              (test-files (list (make-pathname :directory (src-dir "system1" "module1") :name "file1" :type "lisp")
+                                (make-pathname :directory (src-dir "system1") :name "file1" :type "lisp")
+                                (make-pathname :directory (src-dir "system1") :name "file2" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module1") :name "file2" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module1-1") :name "file1" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module1-1") :name "file3" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module1" "module1-1") :name "file1" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module1" "module1-1") :name "file3" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module2") :name "file1" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module2") :name "file2" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module2" "module1-1") :name "file1" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module2" "module1-1") :name "file3" :type "lisp")
+                                (make-pathname :directory (src-dir "system1" "module2") :name "file4" :type "lisp")
+                                (make-pathname :directory (src-dir "system2" "module3") :name "file1" :type "lisp")
+                                (make-pathname :directory (src-dir "system2" "module3") :name "file2" :type "lisp")
+                                (make-pathname :directory (src-dir "system2" "module3") :name "file5" :type "lisp")
+                                (make-pathname :directory (src-dir "system2" "module3" "module1-1") :name "file1" :type "lisp")
+                                (make-pathname :directory (src-dir "system2" "module3" "module1-1") :name "file3" :type "lisp"))))
+          (dolist (file test-files)
+            (ensure-directories-exist file)
+            (with-open-file (stream file :direction :output :if-exists :supersede :if-does-not-exist :create) stream))
+          (dolist (system-pathname systems)
+            (dolist (module-pathname modules)
+              (dolist (source-pathname sources)
+                (let ((configuration (list system-pathname module-pathname source-pathname)))
+                  (block :make-system
+                    (handler-bind
+                      ((error (lambda (c)
+                                (incf system-failures)
+                                (format result-stream "~&*** error: ~s:~%*** ~a."
+                                        (list system-pathname module-pathname source-pathname)
+                                         c)
+                                (return-from :make-system))))
+                      (incf system-count)
+                      (let* ((system (eval `(asdf:defsystem :system1
+                                              :pathname ,system-pathname
+                                              :components ((:module :module1
+                                                                    :pathname ,module-pathname
+                                                                    :components
+                                                                    ((:file "file1" :pathname ,source-pathname)))))))
+                             (cp-list (list (asdf:component-pathname system)
+                                            (asdf:component-pathname (first (asdf:module-components system)))
+                                            ;; with and without an explicit type
+                                            (asdf:component-pathname (first (asdf:module-components
+                                                                             (first (asdf:module-components system)))))
+                                            (make-pathname :type "lisp"
+                                                           :defaults (asdf:component-pathname
+                                                                      (first (asdf:module-components
+                                                                              (first (asdf:module-components system))))))))
+                             ;; guard probe-file against incomplete pathnames (eg, w/o name component sbcl signals an error)
+                             (pf-list (mapcar #'(lambda (p) (ignore-errors (probe-file p))) cp-list)))
+                        (incf file-count (length pf-list))
+                        (when (member nil pf-list)
+                          (incf file-failures (count nil pf-list))
+                          (push (list configuration
+                                      (mapcar #'(lambda (pf cp)
+                                                  (unless pf
+                                                    (if (typep cp 'logical-pathname)
+                                                      (cons cp (translate-logical-pathname cp))
+                                                      cp)))
+                                              pf-list cp-list))
+                                results)))))))))
+          (dolist (r (nreverse results)) (print r result-stream))
+          (print (print `(,(pathname result-stream)
+                          :system-failures (,system-failures ,system-count)
+                          :pathname-failures (,file-failures ,file-count))
+                        result-stream)
+                 *trace-output*)))))
+  (setf (logical-pathname-translations "ASDFTEST") nil)
+  (remhash "test-system" asdf::*defined-systems*))
+
+;;; (load "LIBRARY:de;setf;utility;asdf;cp-test.lisp")
+;;; (logical-pathname-translations "ASDFTEST")
+;;; (gethash "test-system" asdf::*defined-systems*)
