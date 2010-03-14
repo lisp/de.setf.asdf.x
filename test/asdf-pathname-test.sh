@@ -25,6 +25,8 @@ mkdir $TIMESTAMP
 cd $TIMESTAMP
 echo "cd $TIMESTAMP"
 
+echo " "
+echo "ABCL:"
 if [[ "NO" == "NO${ABCL}" ]]
 then
   echo "NO ABCL"
@@ -39,6 +41,8 @@ EOF
  )
 fi
 
+echo " "
+echo "ALISP:"
 if [[ "NO" == "NO${ALISP}" ]]
 then
   echo "NO ALISP"
@@ -48,6 +52,8 @@ else
   (cd alisp; $ALISP -L ${ROOT}/test-init.lisp -L "${ROOT}/asdf-pathname-test.lisp" -kill )
 fi
 
+echo " "
+echo "CCL:"
 if [[ "NO" == "NO${CCL}" ]]
 then
   echo "NO CCL"
@@ -57,6 +63,8 @@ else
   (cd ccl; $CCL --batch --no-init --load ${ROOT}/test-init.lisp --eval "(load \"${ROOT}/asdf-pathname-test.lisp\")" --eval "(quit)")
 fi
 
+echo " "
+echo "CLISP:"
 if [[ "NO" == "NO${CLISP}" ]]
 then
   echo "NO CLISP"
@@ -66,6 +74,8 @@ else
   (cd clisp; $CLISP -x "(load \"${ROOT}/asdf/asdf.lisp\")" -x "(load \"${ROOT}/asdf-pathname-test.lisp\")")
 fi
 
+echo " "
+echo "CMUCL:"
 if [[ "NO" == "NO${CMUCL}" ]]
 then
   echo "NO CMUCL"
@@ -75,6 +85,8 @@ else
   (cd cmucl; $CMUCL -batch -load "${ROOT}/test-init.lisp" -load "${ROOT}/asdf-pathname-test.lisp" -eval "(quit)" )
 fi
 
+echo " "
+echo "ECL:"
 if [[ "NO" == "NO${ECL}" ]]
 then
   echo "NO ECL"
@@ -84,6 +96,8 @@ else
   (cd ecl; $ECL -load "${ROOT}/asdf/asdf.lisp" -load "${ROOT}/asdf-pathname-test.lisp" -eval "(quit)")
 fi
 
+echo " "
+echo "LW:"
 if [[ "NO" == "NO${LW}" ]]
 then
   echo "NO LW"
@@ -98,6 +112,8 @@ EOF
  )
 fi
 
+echo " "
+echo "SBCL:"
 if [[ "NO" == "NO${SBCL}" ]]
 then
   echo "NO SBCL"
